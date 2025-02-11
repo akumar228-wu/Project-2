@@ -1,0 +1,56 @@
+doctype html
+head
+  link(rel='preconnect' href='https://fonts.gstatic.com')
+  link(href='https://fonts.googleapis.com/css2?family=Sacramento&display=swap' rel='stylesheet')
+  link(rel='StyleSheet' href='css/styles.css' type='text/css')
+  link(rel="icon" href="images/tech-icon.ico" type="image/x-icon")
+  //- PWA
+  link(rel='manifest' href='manifest.json')
+  link(rel='apple-touch-icon' href='images/hello-icon-152.png')
+  meta(name='apple-mobile-web-app-capable' content='yes')
+  meta(name='apple-mobile-web-app-status-bar-style' content='black')
+  meta(name='apple-mobile-web-app-title' content='Hello World')
+  meta(name='msapplication-TileImage' content='images/hello-icon-144.png')
+  meta(name='msapplication-TileColor' content='#FFFFFF')
+
+
+header
+  nav
+    ul
+      li
+        a(href='/home') Home
+      li   |
+      li
+        a(href='/blog')   Blog
+      if !user
+        li.register-link                                                                                  
+          a(href='/register') Register  
+        li   |   
+        li                                                                                
+          a(href='/login')   Login  
+      else
+        li.register-link
+          a(href='/logout')   Logout
+main
+  div.main_container
+    section#intro-text
+      h3
+        |  Discover &amp; Discuss
+        br
+        |             The World of Cinema
+      span Movie Magic Unleashed  
+      p Movie Reviews, Trailers, Behind-the-Scenes &amp; More&mdash;your ultimate film destination!
+      //
+        <p class="success">SUCCESS</p>
+        <p class="error">ERROR</p>
+        <p class="warning">WARNING</p>
+      a.submit-button(href='/blog') View Blogs
+    section#intro-image
+          img.slide.active(src='images/movies-collage.jpg' alt='movies image')
+          img.slide(src='images/movies-collage-2.jpg' alt='movies image 2')
+          img.slide(src='images/movies-collage-3.jpg' alt='movies image 3')
+footer
+  | &copy; Copyright 2025 
+
+script(src='script.js')
+script(src='js/main.js')

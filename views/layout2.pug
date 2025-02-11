@@ -1,0 +1,23 @@
+doctype html
+html(lang="en")
+  head
+    title= title
+    meta(charset="UTF-8")
+    meta(name="viewport", content="width=device-width, initial-scale=1.0")
+    link(rel="stylesheet", href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css")
+    link(rel="stylesheet", href="/css/styles2.css")
+    link(rel="stylesheet", href="/css/styles.css")
+    script(src="https://cdn.jsdelivr.net/npm/vue@2.6.12/dist/vue.js")
+
+  body
+
+    .main-wrapper
+      .header
+        h1 Blogs to share
+      nav
+        ul
+          li.blog_home
+            a(href=isAuthenticated ? '/blog' : '/home' class=path === '/' ? 'active' : '') Back to Home
+      block content
+
+    block scripts

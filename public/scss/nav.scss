@@ -1,0 +1,114 @@
+/* Nesting */
+@import "variables.scss";
+@import "colors.scss";
+/* SCSS */
+
+nav {
+    font: {
+        size: 1em;
+        weight: bold;
+    }
+    width: 100%;
+    
+    ul {
+        list-style-type: none;
+        display: flex; 
+        justify-content: flex-start; 
+        align-items: center; 
+        padding: 0;
+        margin: 0; 
+        
+        li {
+            margin: 0 1.5rem 0 0; // 增加间距让布局更通透
+            position: relative; // 为hover效果准备
+            
+            a {
+              color: $color4;
+              font-size: 1.1rem;
+              font-weight: 500;
+              letter-spacing: 0.02em; // 轻微增加字间距提升现代感
+              text-decoration: none;
+              padding: 0.5rem 0;
+              transition: all 0.3s ease;
+              
+              // 现代感渐变文字效果
+              background: linear-gradient(
+                90deg,
+                rgba($color4, 1) 0%,
+                rgba($color4, 0.8) 100%
+              );
+              -webkit-background-clip: text;
+              background-clip: text;
+              
+              // 添加精致的hover效果
+              &:hover {
+                color: transparent;
+                background: linear-gradient(
+                  90deg,
+                  #3B82F6 0%,
+                  #A78BFA 100%
+                );
+                -webkit-background-clip: text;
+                background-clip: text;
+                transform: translateY(-1px);
+                
+                // 底部滑动线条
+                &::after {
+                  transform: scaleX(1);
+                  opacity: 1;
+                }
+              }
+              
+              // 底部装饰线
+              &::after {
+                content: '';
+                position: absolute;
+                bottom: 0;
+                left: 0;
+                width: 100%;
+                height: 2px;
+                background: linear-gradient(
+                  90deg,
+                  #3B82F6 0%,
+                  #A78BFA 100%
+                );
+                transform: scaleX(0);
+                opacity: 0;
+                transition: all 0.3s ease;
+                transform-origin: left center;
+              }
+            }
+            
+            // 如果是当前页面，显示活跃状态
+            &.active a {
+              color: transparent;
+              background: linear-gradient(
+                90deg,
+                #3B82F6 0%,
+                #A78BFA 100%
+              );
+              -webkit-background-clip: text;
+              background-clip: text;
+              font-weight: 600;
+              
+              &::after {
+                transform: scaleX(1);
+                opacity: 1;
+              }
+            }
+            
+            &.register-link {
+                margin-left: auto; 
+            }
+            
+            a {
+                text-decoration: none;
+                color: $color4;
+                
+                &:hover {
+                    text-decoration: underline;
+                }
+            }
+        }
+    }
+}

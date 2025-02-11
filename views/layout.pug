@@ -1,0 +1,19 @@
+doctype html
+html
+  head
+    title= `${title}`
+    link(rel='stylesheet', href='/css/bootstrap.min.css')
+    link(rel='stylesheet', href='/css/styles.css')
+
+  body
+    div.container.listing-reg
+      header.app-header
+        h1.app-title
+          span.brand-icon 
+            i.bi.bi-stars
+          | Tech Blog Registrants
+          span.brand-subtitle The Show List
+          
+          .title-underline
+
+      block content

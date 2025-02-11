@@ -1,0 +1,474 @@
+@use "sass:math";
+@use "sass:color";
+
+@import "nav.scss";
+@import "listingtable.scss";
+@import "variables.scss";
+@import "registrants.scss";
+@import "colors.scss";
+
+html { 
+  // Operations
+  font-size: 0.8em + 0.2;           //1 
+  width: math.div(100%, 2) + 50%;     //75;
+}
+
+body{
+  font-family: $fontFamily1;  
+  // background: $backgroundColor1;
+  background: linear-gradient(135deg,#ffffff,#b4bbc0);
+}
+
+header {
+    height: 50px;
+    width: 1350px;
+    margin: 0.8em auto 1em auto;
+}
+
+@keyframes lightEffect {
+  0% {
+    box-shadow: 
+      0 0 0 rgba(72, 85, 99, 0),
+      0 0 0 rgba(72, 85, 99, 0),
+      0 0 0 rgba(72, 85, 99, 0),
+      0 0 0 rgba(72, 85, 99, 0);
+    transform: translateY(20px);
+    opacity: 0;
+  }
+  
+  100% {
+    box-shadow: 
+      8px 8px 10px rgba(72, 85, 99, 0.2),
+      15px 15px 20px rgba(72, 85, 99, 0.3),
+      25px 25px 35px rgba(72, 85, 99, 0.4),
+      35px 35px 50px rgba(72, 85, 99, 0.3);
+    transform: translateY(0);
+    opacity: 1;  // 确保最终状态是完全可见的
+  }
+}
+
+@keyframes innerLight {
+  0% {
+    opacity: 0;
+    background: linear-gradient(
+      135deg,
+      rgba(255, 255, 255, 0.1) 0%,
+      transparent 50%
+    );
+  }
+  
+  100% {
+    opacity: 1;
+    background: linear-gradient(
+      135deg,
+      rgba(255, 255, 255, 0.2) 0%,
+      transparent 60%
+    );
+  }
+}
+
+main {
+  background: $mainColor;
+  width: 1200px;
+  min-height: 535px;
+  padding: 1.5%;
+  margin: 0 auto;
+  position: relative;
+  overflow: hidden;
+  
+  // 初始状态设置
+  opacity: 0;
+  transform: translateY(20px);
+  
+  // 应用动画
+  animation: lightEffect 1s cubic-bezier(0.215, 0.610, 0.355, 1.000) forwards;
+  
+  // 添加光源效果
+  &::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(
+      circle at top left,
+      rgba(255, 255, 255, 0.2),
+      transparent 70%
+    );
+    animation: innerLight 1s ease-out forwards;
+    pointer-events: none;
+  }
+  
+  // 增强内阴影效果
+  &::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    box-shadow: 
+      inset -4px -4px 8px rgba(255, 255, 255, 0.2),
+      inset 4px 4px 8px rgba(0, 0, 0, 0.1);
+    animation: innerLight 1s ease-out forwards;
+    pointer-events: none;
+  }
+  
+  // hover效果增强
+  &:hover {
+    box-shadow: 
+      10px 10px 15px rgba(72, 85, 99, 0.25),
+      20px 20px 25px rgba(72, 85, 99, 0.35),
+      30px 30px 40px rgba(72, 85, 99, 0.45),
+      40px 40px 60px rgba(72, 85, 99, 0.35);
+    transition: box-shadow 0.3s ease;
+  }
+  
+  // 添加渐变背景增强光源效果
+  background: linear-gradient(
+    135deg,
+    color.scale($mainColor, $lightness: 5%) 0%,
+    $mainColor 60%,
+    color.scale($mainColor, $lightness: -5%) 100%
+  );
+  
+  
+  #intro-image {
+    flex: 0 0 1500px;
+    height: 527px;
+    overflow: hidden;
+    border-radius: 12px;
+
+    img {
+      width: 100%;
+      height: 100%;
+      transition: transform 0.3s ease;
+      
+      &:hover {
+        transform: scale(1.05);
+      }
+    }
+  }
+
+  #intro-text {
+    width: 500px;
+    height: 407px;
+    float:left;
+    background: $sectionColor;
+    text-align: center;
+    padding-top: 8em;
+
+    h3 {
+      font-size: $fontSizeH3;
+      color: $color3;
+    }
+
+    span {
+      font-family: $fontFamily2;
+      font-size: 2em;
+    }
+  }
+
+}
+
+footer {
+    width: 1350px;
+    margin: 2em auto;
+    padding-left: 80px;
+    font-size: $fontSizeSmall;
+}
+
+// @extend 
+button {
+  color: $color4;
+  width: 100px;
+  height: 40px;
+  background: $backgroundColor1;
+  margin-top: 2em;
+}
+.submit-buttton {
+  @extend button;
+  border: 1px $color3;
+}
+
+
+//layout.pug
+.app-header {
+  text-align: center;
+  padding: 2.5rem 0;
+  margin-bottom: 2rem;
+  position: relative;
+
+  .app-title {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: #2c3e50;
+    margin: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    
+    .brand-icon {
+      color: #4a90e2;
+      font-size: 0.9em;
+      margin-right: 0.2rem;
+    }
+
+    .brand-subtitle {
+      display: block;
+      font-size: 0.4em;
+      font-weight: 400;
+      color: #6c757d;
+      margin-top: 0.5rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
+    
+    .title-underline {
+      position: absolute;
+      bottom: 2rem;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 60px;
+      height: 3px;
+      background: linear-gradient(90deg, #4a90e2, #357abd);
+      border-radius: 2px;
+    }
+  }
+}
+
+
+
+//login
+// Login page specific variables
+$form-bg: rgba(255, 255, 255, 0.95);
+$input-bg: #f8fafc;
+$primary-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+$error-color: #ef4444;
+$success-color: #10b981;
+
+.login-page {
+  min-height: 100vh;
+  background: linear-gradient(45deg, #f6f7ff, #ffffff);
+  position: relative;
+  overflow: hidden;
+
+  &::before {
+    content: '';
+    position: absolute;
+    width: 1000px;
+    height: 1000px;
+    background: $primary-gradient;
+    filter: blur(100px);
+    opacity: 0.1;
+    animation: gradientMove 20s ease-in-out infinite;
+    z-index: -1;
+  }
+}
+
+.login-container {
+  max-width: 1200px;
+  margin: 2rem auto;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4rem;
+  padding: 2rem;
+  align-items: center;
+
+  @media (max-width: 768px) {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+}
+
+.login-content {
+  .welcome-text {
+    font-family: 'Sacramento', cursive;
+    font-size: 3em;
+    color: transparent;
+    background: $primary-gradient;
+    -webkit-background-clip: text;
+    background-clip: text;
+    margin-bottom: 1rem;
+    display: block;
+  }
+
+  .login-title {
+    font-size: 2.5em;
+    font-weight: 700;
+    line-height: 1.3;
+    margin: 1rem 0;
+    color: #1e293b;
+  }
+}
+
+.login-form-container {
+  .form-card {
+    background: $form-bg;
+    padding: 2.5rem;
+    border-radius: 24px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(10px);
+    animation: slideUp 0.5s ease-out;
+  }
+
+  .form-title {
+    font-size: 1.5rem;
+    color: #1e293b;
+    margin-bottom: 2rem;
+    text-align: center;
+  }
+}
+
+.form-group {
+  margin-bottom: 1.5rem;
+
+  label {
+    display: block;
+    margin-bottom: 0.5rem;
+    color: #64748b;
+    font-size: 0.9rem;
+  }
+}
+
+.input-container {
+  position: relative;
+  
+  .input-icon {
+    position: absolute;
+    left: 1rem;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #94a3b8;
+  }
+
+  input {
+    width: 100%;
+    padding: 0.75rem 1rem 0.75rem 3rem;
+    border: 1px solid #e2e8f0;
+    border-radius: 12px;
+    background: $input-bg;
+    transition: all 0.3s ease;
+    font-size: 1rem;
+
+    &:focus {
+      outline: none;
+      border-color: #667eea;
+      box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+    }
+
+    &::placeholder {
+      color: #94a3b8;
+    }
+  }
+}
+
+.submit-button {
+  width: 20em;
+  padding: 1rem;
+  margin: 0 auto;
+  background: $primary-gradient;
+  color: white;
+  border: none;
+  border-radius: 12px;
+  font-size: 1rem;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 20px rgba(102, 126, 234, 0.2);
+  }
+
+  .button-icon {
+    transition: transform 0.3s ease;
+  }
+
+  &:hover .button-icon {
+    transform: translateX(4px);
+  }
+}
+
+.error-container {
+  margin-bottom: 1.5rem;
+}
+
+.error-message {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1rem;
+  background: rgba($error-color, 0.1);
+  color: $error-color;
+  border-radius: 8px;
+  font-size: 0.9rem;
+  margin-bottom: 0.5rem;
+
+  .error-icon {
+    flex-shrink: 0;
+  }
+}
+
+.form-footer {
+  margin-top: 1.5rem;
+  text-align: center;
+  font-size: 0.9rem;
+  color: #64748b;
+
+  a {
+    color: #667eea;
+    text-decoration: none;
+    font-weight: 500;
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes gradientMove {
+  0%, 100% {
+    transform: translate(0, 0);
+  }
+  50% {
+    transform: translate(30%, 20%);
+  }
+}
+
+// Responsive adjustments
+@media (max-width: 768px) {
+  .login-container {
+    padding: 1rem;
+  }
+
+  .login-content {
+    text-align: center;
+
+    .welcome-text {
+      font-size: 2.5em;
+    }
+
+    .login-title {
+      font-size: 2em;
+    }
+  }
+
+  .form-card {
+    padding: 1.5rem;
+  }
+}

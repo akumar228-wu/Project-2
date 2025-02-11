@@ -1,0 +1,195 @@
+@import url(https://fonts.googleapis.com/css?family=Bitter:400,400italic,700);
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Bitter", serif;
+}
+
+.header {
+  background: linear-gradient(to right, rgb(58, 96, 115), rgb(22, 34, 42));
+  height: 13em;
+  font-size: large;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.header h1 {
+  color: rgb(255, 255, 255);
+  font-size: 1.3em;
+}
+
+#vue {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 2em 0;
+}
+#vue h3 {
+  width: 100%;
+  text-align: center;
+  margin-bottom: 1em;
+  font-size: 1.5em;
+  color: rgb(22, 34, 42);
+}
+
+.card-list {
+  width: 90%;
+  max-width: 60em;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  padding: 0;
+  list-style-type: none;
+}
+
+.card-item {
+  width: 12em;
+  margin: 0 1em 2em 0;
+  background-color: rgb(255, 255, 255);
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  transition: transform 0.3s ease;
+  display: flex;
+  flex-direction: column;
+}
+.card-item:hover {
+  transform: translateY(-5px);
+}
+.card-item img {
+  width: 100%;
+  height: 12em;
+  object-fit: cover;
+}
+.card-item span {
+  display: block;
+  text-align: center;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  padding: 0.5em;
+}
+.card-item .name {
+  font-weight: bold;
+  color: rgb(22, 34, 42);
+  font-size: 1em;
+}
+.card-item .description {
+  font-style: italic;
+  font-size: 0.8em;
+  color: rgba(0, 0, 0, 0.7);
+  height: 5em;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.like-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto;
+  margin-top: auto;
+  margin-bottom: 1em;
+  border: none;
+  padding: 0.5em 1em;
+  background-color: rgb(255, 255, 255);
+  cursor: pointer;
+  font-size: 0.9em;
+  transition: all 0.3s ease;
+  border-radius: 20px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  white-space: nowrap;
+}
+.like-button:hover {
+  background-color: rgba(58, 96, 115, 0.1);
+}
+.like-button .heart {
+  color: #ccc;
+  font-size: 1.2em;
+  transition: color 0.3s ease, transform 0.3s ease;
+}
+.like-button.liked .heart {
+  color: #ff4136;
+  transform: scale(1.2);
+}
+.like-button span:last-child {
+  color: rgb(22, 34, 42);
+  display: inline-block;
+  vertical-align: middle;
+}
+.like-button #likeCount {
+  margin-left: 0.5em;
+  vertical-align: middle;
+}
+
+@media (max-width: 768px) {
+  .card-list {
+    width: 100%;
+  }
+  .card-item {
+    width: calc(50% - 1em);
+    margin: 0 0.5em 1em 0.5em;
+  }
+}
+@media (max-width: 480px) {
+  .card-item {
+    width: calc(100% - 2em);
+    margin: 0 1em 1em 1em;
+  }
+}
+.article-container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 2em;
+}
+.article-header {
+  margin-bottom: 2em;
+}
+.article-title {
+  font-size: 2em;
+  color: rgb(22, 34, 42);
+  margin-bottom: 0.5em;
+}
+.article-meta {
+  color: #666;
+  font-size: 0.9em;
+}
+.article-meta .separator {
+  margin: 0 0.5em;
+}
+.article-content {
+  margin-top: 2em;
+}
+.article-image {
+  width: 100%;
+  max-height: 400px;
+  object-fit: cover;
+  border-radius: 8px;
+  margin-bottom: 2em;
+}
+.article-text {
+  line-height: 1.6;
+  color: #333;
+}
+.article-actions {
+  margin-top: 2em;
+  text-align: center;
+}
+
+.back-button {
+  display: inline-block;
+  margin-bottom: 1em;
+  color: rgb(58, 96, 115);
+  text-decoration: none;
+  font-size: 1.1em;
+}
+.back-button:hover {
+  color: rgb(22, 34, 42);
+}
+
+.blog_home {
+  margin-top: 1em;
+  padding: 1em;
+}
+
+/*# sourceMappingURL=styles2.css.map */

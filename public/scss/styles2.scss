@@ -1,0 +1,247 @@
+@import url(https://fonts.googleapis.com/css?family=Bitter:400,400italic,700);
+
+// Variables
+$primary-color: rgb(22, 34, 42);
+$secondary-color: rgb(58, 96, 115);
+$white: rgb(255, 255, 255);
+$font-family: "Bitter", serif;
+$card-width: 12em;
+$header-height: 13em;
+
+// Mixins
+@mixin flex-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+@mixin card-shadow {
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+// Reset
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: $font-family;
+}
+
+// Header
+.header {
+  background: linear-gradient(to right, $secondary-color, $primary-color);
+  height: $header-height;
+  font-size: large;
+  @include flex-center;
+
+  h1 {
+    color: $white;
+    font-size: 1.3em;
+  }
+}
+
+// Vue Container
+#vue {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 2em 0;
+
+  h3 {
+    width: 100%;
+    text-align: center;
+    margin-bottom: 1em;
+    font-size: 1.5em;
+    color: $primary-color;
+  }
+}
+
+// Card List
+.card-list {
+  width: 90%;
+  max-width: 60em;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  padding: 0;
+  list-style-type: none;
+}
+
+// Card Item
+.card-item {
+  width: $card-width;
+  margin: 0 1em 2em 0;
+  background-color: $white;
+  border-radius: 8px;
+  @include card-shadow;
+  overflow: hidden;
+  transition: transform 0.3s ease;
+  display: flex;
+  flex-direction: column;
+
+  &:hover {
+    transform: translateY(-5px);
+  }
+
+  img {
+    width: 100%;
+    height: $card-width;
+    object-fit: cover;
+  }
+
+  span {
+    display: block;
+    text-align: center;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    padding: 0.5em;
+  }
+
+  .name {
+    font-weight: bold;
+    color: $primary-color;
+    font-size: 1em;
+  }
+
+  .description {
+    font-style: italic;
+    font-size: 0.8em;
+    color: rgba(0, 0, 0, 0.7);
+    height: 5em;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+}
+
+// Like Button
+.like-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto;
+  margin-top: auto;
+  margin-bottom: 1em;
+  border: none;
+  padding: 0.5em 1em;
+  background-color: $white;
+  cursor: pointer;
+  font-size: 0.9em;
+  transition: all 0.3s ease;
+  border-radius: 20px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  white-space: nowrap;
+
+  &:hover {
+    background-color: rgba($secondary-color, 0.1);
+  }
+
+  .heart {
+    color: #ccc;
+    font-size: 1.2em;
+    transition: color 0.3s ease, transform 0.3s ease;
+  }
+
+  &.liked .heart {
+    color: #ff4136;
+    transform: scale(1.2);
+  }
+
+  span:last-child {
+    color: $primary-color;
+    display: inline-block;
+    vertical-align: middle;
+  }
+
+  #likeCount {
+    margin-left: 0.5em;
+    vertical-align: middle;
+  }
+}
+
+// Media Queries
+@media (max-width: 768px) {
+  .card-list {
+    width: 100%;
+  }
+  
+  .card-item {
+    width: calc(50% - 1em);
+    margin: 0 0.5em 1em 0.5em;
+  }
+}
+
+@media (max-width: 480px) {
+  .card-item {
+    width: calc(100% - 2em);
+    margin: 0 1em 1em 1em;
+  }
+}
+
+// Article Styles
+.article {
+  &-container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 2em;
+  }
+
+  &-header {
+    margin-bottom: 2em;
+  }
+
+  &-title {
+    font-size: 2em;
+    color: $primary-color;
+    margin-bottom: 0.5em;
+  }
+
+  &-meta {
+    color: #666;
+    font-size: 0.9em;
+
+    .separator {
+      margin: 0 0.5em;
+    }
+  }
+
+  &-content {
+    margin-top: 2em;
+  }
+
+  &-image {
+    width: 100%;
+    max-height: 400px;
+    object-fit: cover;
+    border-radius: 8px;
+    margin-bottom: 2em;
+  }
+
+  &-text {
+    line-height: 1.6;
+    color: #333;
+  }
+
+  &-actions {
+    margin-top: 2em;
+    text-align: center;
+  }
+}
+
+// Back Button
+.back-button {
+  display: inline-block;
+  margin-bottom: 1em;
+  color: $secondary-color;
+  text-decoration: none;
+  font-size: 1.1em;
+
+  &:hover {
+    color: $primary-color;
+  }
+}
+
+// Blog Home
+.blog_home {
+  margin-top: 1em;
+  padding: 1em;
+}

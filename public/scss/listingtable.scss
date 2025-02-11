@@ -1,0 +1,139 @@
+// Variables
+$primary-dark: #2c3e50;
+$primary-light: #3498db;
+$hover-dark: #34495e;
+$border-color: rgba(0, 0, 0, 0.08);
+$zebra-color: #f8f9fa;
+$hover-color: #f0f7ff;
+$selected-bg: #e8f4fe;
+$selected-border: #bde0fe;
+$empty-text: #6c757d;
+
+// Mixins
+@mixin gradient($start-color, $end-color) {
+  background: linear-gradient(45deg, $start-color, $end-color);
+}
+
+@mixin transition($property...) {
+  transition: $property;
+}
+
+// Animation
+@keyframes tableAppear {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+// Table Styling
+.listing-table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+  margin: 1.5rem 0;
+  overflow: hidden;
+  animation: tableAppear 0.5s ease-out forwards;
+
+  // Header Styling
+  th {
+    padding: 1rem 1.5rem;
+    @include gradient($primary-dark, $primary-light);
+    color: white;
+    font-weight: 600;
+    text-transform: uppercase;
+    font-size: 0.9rem;
+    letter-spacing: 0.5px;
+    position: relative;
+    @include transition(background-color 0.3s ease);
+
+    &:first-child {
+      border-top-left-radius: 12px;
+    }
+
+    &:last-child {
+      border-top-right-radius: 12px;
+    }
+
+    &:not(:last-child) {
+      border-right: 1px solid $border-color;
+    }
+
+    // Sortable Headers
+    &.sortable {
+      cursor: pointer;
+      padding-right: 2rem;
+
+      &::after {
+        content: "↕";
+        position: absolute;
+        right: 0.75rem;
+        opacity: 0.5;
+      }
+
+      &:hover {
+        @include gradient($hover-dark, $primary-light);
+      }
+    }
+  }
+
+  // Cell Styling
+  td {
+    padding: 1rem 1.5rem;
+    color: $primary-dark;
+    @include transition(background-color 0.2s ease);
+
+    &:not(:last-child) {
+      border-right: 1px solid $border-color;
+    }
+  }
+
+  // Row Styling
+  tr {
+    &:not(:last-child) td {
+      border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+    }
+
+    &:nth-child(even) td {
+      background-color: $zebra-color;
+    }
+
+    &:not(:first-child):hover td {
+      background-color: $hover-color;
+    }
+
+    // Empty State
+    &:only-child td {
+      padding: 2rem;
+      text-align: center;
+      color: $empty-text;
+      font-style: italic;
+    }
+
+    // Selected Row
+    &.selected td {
+      background-color: $selected-bg !important;
+      border-color: $selected-border;
+    }
+  }
+
+  // Responsive Design
+  @media (max-width: 768px) {
+    display: block;
+    overflow-x: auto;
+    white-space: nowrap;
+    -webkit-overflow-scrolling: touch;
+
+    th,
+    td {
+      padding: 0.875rem 1.25rem;
+    }
+  }
+}
