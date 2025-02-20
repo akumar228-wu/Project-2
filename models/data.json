@@ -1,0 +1,47 @@
+[
+    {
+        "title": "Top 10 Must-Watch Movies of 2024",
+        "description": "A curated list of the best movies released in 2024 that you shouldn't miss.",
+        "image_url": "https://example.com/top-movies-2024.jpg",
+        "date": "2024-02-10",
+        "content": "From action-packed blockbusters to heartwarming dramas, 2024 has been an incredible year for cinema. Here are the top 10 movies you need to watch...",
+        "author": "cinephile123",
+        "likes": 150
+    },
+    {
+        "title": "Behind the Scenes of 'Epic Universe'",
+        "description": "An exclusive look at the making of the sci-fi blockbuster 'Epic Universe'.",
+        "image_url": "https://example.com/epic-universe.jpg",
+        "date": "2024-01-25",
+        "content": "Discover how the stunning visuals and groundbreaking special effects of 'Epic Universe' were created, straight from the director and crew...",
+        "author": "cinephile123",
+        "likes": 95
+    },
+    {
+        "title": "The Evolution of Superhero Movies",
+        "description": "How superhero movies have transformed over the decades.",
+        "image_url": "https://example.com/superhero-evolution.jpg",
+        "date": "2024-02-01",
+        "content": "From the early days of comic book adaptations to the cinematic universes of today, superhero movies have come a long way. Here's a deep dive into their evolution...",
+        "author": "cinephile123",
+        "likes": 110
+    },
+    {
+        "title": "Classic vs Modern Horror: A Comparison",
+        "description": "Exploring the differences between classic and modern horror films.",
+        "image_url": "https://example.com/horror-comparison.jpg",
+        "date": "2024-01-15",
+        "content": "Classic horror films relied on suspense and atmosphere, while modern horror often uses jump scares and gore. Which style do you prefer?",
+        "author": "cinephile123",
+        "likes": 80
+    },
+    {
+        "title": "The Rise of Independent Cinema",
+        "description": "How indie films are making a big impact in the movie industry.",
+        "image_url": "https://example.com/indie-cinema.jpg",
+        "date": "2024-01-30",
+        "content": "Independent films are gaining recognition for their unique storytelling and creative freedom. Here's why indie cinema is worth your attention...",
+        "author": "cinephile123",
+        "likes": 70
+    }
+]

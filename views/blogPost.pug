@@ -1,0 +1,66 @@
+extends layout2
+
+block content
+  #vue
+    .article-container(v-if="post")
+      .article-header
+        a.back-button(href='/blog') ← Back to Blog
+        h1.article-title {{ post.title }}
+        .article-meta
+          span.author {{ post.author }}
+          span.separator ·
+          span.time {{ post.date }}
+      
+      .article-content
+        img.article-image(:src="post.image_url" :alt="post.title")
+        .article-text(v-html="formattedContent")
+        
+      .article-actions
+        button.like-button(
+          @click="toggleLike"
+          :class="{ 'liked': isLiked }"
+        )
+          span.heart ❤
+          span#likeCount Likes:{{ likes }} 
+
+block scripts
+  script.
+    const serverPost = !{JSON.stringify(post)};
+
+    new Vue({
+      el: '#vue',
+      data: {
+        post: serverPost,
+        likes: serverPost.likes,
+        isLiked: serverPost.isLiked
+      },
+      computed: {
+        formattedContent() {
+          return this.post.content.replace(/\n/g, '<br>');
+        }
+      },
+      methods: {
+        toggleLike() {
+          fetch('/toggle-like', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ 
+              dishId: this.post._id
+            }),
+          })
+          .then(response => response.json())
+          .then(data => {
+            this.likes = data.likes;
+            this.isLiked = data.isLiked;
+          })
+          .catch(error => {
+            console.error('Error:', error);
+          });
+        }
+      },
+      mounted() {
+        console.log('Article detail page loaded:', this.post);
+      }
+    });

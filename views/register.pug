@@ -1,0 +1,82 @@
+doctype html
+head
+  link(rel='preconnect' href='https://fonts.gstatic.com')
+  link(href='https://fonts.googleapis.com/css2?family=Sacramento&display=swap' rel='stylesheet')
+  link(rel='StyleSheet' href='css/styles.css' type='text/css')
+  script(src='script.js')
+header
+  nav
+    ul
+      li
+        a(href='/home') Home
+      li |
+      li
+        a(href='/blog') Blog
+      li.register-link                                                                                  
+        a(href='/register')   Register  
+main
+  section#intro-text
+    span Simple Appication Sharing
+    h3
+      | Simple &amp; Coding 
+      br
+      |             Powerful Technique Sharing 
+    //
+      <p class="success">SUCCESS</p>
+      <p class="error">ERROR</p>
+      <p class="warning">WARNING</p>
+  section#intro-image
+  
+    -data = data || {}
+
+    if errors && errors.length
+        ul.my-errors
+            each error in errors
+                li= error.msg
+                
+    h1.headline-container
+        strong.register-headline Register to subscribe
+
+    form(action="/register" method="POST" class="form-registration")
+        label(for="username") Username:
+        input(
+            type="text"
+            id="username"
+            name="username"
+            class="form-control"
+            value=data.username
+        )
+
+        label(for="password") Password:
+        input(
+            type="password"
+            id="password"
+            name="password"
+            class="form-control"
+        )
+
+        label(for="email") Email:
+        input(
+            type="email"
+            id="email"
+            name="email"
+            class="form-control"
+            value=data.email
+        )
+
+        label(for="phone") Phone:
+        input(
+            type="tel"
+            id="phone"
+            name="phone"
+            class="form-control"
+            value=data.phone
+        )
+
+        input(
+            type="submit" 
+            value="Submit"
+            class="btn btn-lg btn-primary btn-block submit-buttton"
+        )
+footer
+  | &copy; Copyright 2025

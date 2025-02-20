@@ -1,0 +1,69 @@
+extends layout2
+
+block content
+  #vue
+    ul.card-list
+      card-item(
+        v-for="li in lis"
+        v-bind:li="li"
+        :key="li.title"
+      )
+
+block scripts
+  script.
+    const serverLis = !{JSON.stringify(lis)};
+    Vue.component('card-item', {
+      props: ['li', 'username'],
+      data() {
+        return {
+          likes: this.li.likes,
+          isLiked: this.li.isLiked
+        }
+      },
+      template: `
+        <li class="card-item">
+          <img :src="li.image_url" :alt="li.title">
+          <span class='name' @click='goToArticle' style='cursor: pointer;' >{{ li.title }}</span>
+          <span class='description'>{{ li.description }}</span>
+          <button @click="toggleLike" class="like-button" :class="{ 'liked': isLiked }">
+            <span class="heart">❤</span>
+            <span>Likes: {{ likes }}</span>
+          </button>
+        </li>
+      `,
+      methods: {
+        toggleLike() {
+          fetch('/toggle-like', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ dishId: this.li._id }),
+          })
+          .then(response => response.json())
+          .then(data => {
+            this.likes = data.likes;
+            this.isLiked = data.isLiked;
+          })
+          .catch(error => console.error('Error:', error));
+        },
+        goToArticle() {
+            window.location.href = `/blog/${this.li._id}`;
+        }
+      }
+    });
+
+    new Vue({
+      el: '#vue',
+      data: {
+        debugMessage: 'Vue is working!',
+        plan: 'gold',
+        lis: serverLis,
+        username: '{{ username }}'
+      },
+      mounted() {
+        console.log('Vue instance mounted');
+        console.log('Number of items:', this.lis.length);
+        console.log(this.lis);
+      }
+    });
