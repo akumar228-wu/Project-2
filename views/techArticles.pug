@@ -1,0 +1,40 @@
+extends layout
+
+block content
+  h1 Tech Articles
+  nav
+    ul
+      li: a(href='/tech/category/AI') AI
+      li: a(href='/tech/category/Cybersecurity') Cybersecurity
+      li: a(href='/tech/category/Gadgets') Gadgets
+      li: a(href='/tech/category/Software') Software
+      li: a(href='/tech/category/Gaming') Gaming
+
+  if articles.length
+    .article-grid
+      each article in articles
+        .article-card
+          img(src=article.image_url, alt=article.title)
+          h3= article.title
+          p= article.description
+          a(href=`/tech/${article._id}`) Read More
+  else
+    p No articles available.
+
+style.
+  .article-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 20px;
+  }
+  .article-card {
+    border: 1px solid #ccc;
+    padding: 15px;
+    text-align: center;
+    border-radius: 8px;
+  }
+  .article-card img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 8px;
+  }

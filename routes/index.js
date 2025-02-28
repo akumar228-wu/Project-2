@@ -8,6 +8,44 @@ const router = express.Router();
 const Registration = mongoose.model('Registration');
 const Blog = mongoose.model('Blog');
 
+const TechArticle = mongoose.model('TechArticle');
+
+// Fetch all tech articles
+router.get('/tech', async (req, res) => {
+  try {
+    const articles = await TechArticle.find().lean();
+    res.render('techArticles', { title: 'Tech Articles', articles });
+  } catch (error) {
+    console.error('Error fetching tech articles:', error);
+    res.status(500).send('Error loading articles');
+  }
+});
+
+// Fetch articles by category
+router.get('/tech/category/:category', async (req, res) => {
+  try {
+    const category = req.params.category;
+    const articles = await TechArticle.find({ category }).lean();
+    res.render('techArticles', { title: `Tech Articles - ${category}`, articles, category });
+  } catch (error) {
+    console.error('Error fetching category articles:', error);
+    res.status(500).send('Error loading articles');
+  }
+});
+
+// Fetch a single article by ID
+router.get('/tech/:id', async (req, res) => {
+  try {
+    const article = await TechArticle.findById(req.params.id).lean();
+    if (!article) return res.status(404).send('Article not found');
+    res.render('techArticleDetail', { title: article.title, article });
+  } catch (error) {
+    console.error('Error fetching article:', error);
+    res.status(500).send('Error loading article details');
+  }
+});
+
+
 
 
 

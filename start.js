@@ -26,6 +26,8 @@ mongoose.connection
 
 require('./models/Registration');
 require('./models/Blog');
+require('./models/TechArticle'); // Register Tech Articles model
+
 const app = require('./app');
 
 const port = 5968;

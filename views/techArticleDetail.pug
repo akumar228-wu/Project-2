@@ -1,0 +1,10 @@
+extends layout
+
+block content
+  h1= article.title
+  img(src=article.image_url, alt=article.title)
+  p Published on: #{article.date.toDateString()}
+  p Category: #{article.category}
+  p Author: #{article.author}
+  p= article.content
+  a(href='/tech') ← Back to Tech Articles
