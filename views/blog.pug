@@ -38,7 +38,7 @@ block scripts
             headers: {
               'Content-Type': 'application/json',
             },
-            body: JSON.stringify({ dishId: this.li._id }),
+            body: JSON.stringify({ blogCardId: this.li._id }),
           })
           .then(response => response.json())
           .then(data => {

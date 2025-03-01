@@ -8,10 +8,6 @@ const router = express.Router();
 const Registration = mongoose.model('Registration');
 const Blog = mongoose.model('Blog');
 
-
-
-
-
 router.get('/home', isLoggedIn, (req, res) => {
   console.log('Homepage - User:', req.user); 
   console.log('Homepage - Session:', req.session);
@@ -94,33 +90,33 @@ router.get('/blog/:id', isLoggedIn, async (req, res) => {
 });
 router.post('/toggle-like', isLoggedIn, async (req, res) => {
   try {
-    const { dishId } = req.body;
+    const { blogCardId } = req.body;
     const username = req.user.username;
 
     const user = await Registration.findOne({ username });
-    const dish = await Blog.findById(dishId);
+    const blogC = await Blog.findById(blogCardId);
 
-    const isLiked = user.like_list.includes(dishId);
+    const isLiked = user.like_list.includes(blogCardId);
 
     if (isLiked) {
       
       await Registration.updateOne(
         { username },
-        { $pull: { like_list: dishId } }
+        { $pull: { like_list: blogCardId } }
       );
-      dish.likes = (dish.likes || 1) - 1;
+      blogC.likes = (blogC.likes || 1) - 1;
     } else {
       
       await Registration.updateOne(
         { username },
-        { $addToSet: { like_list: dishId } }
+        { $addToSet: { like_list: blogCardId } }
       );
-      dish.likes = (dish.likes || 0) + 1;
+      blogC.likes = (blogC.likes || 0) + 1;
     }
 
-    await dish.save();
+    await blogC.save();
 
-    res.json({ likes: dish.likes, isLiked: !isLiked });
+    res.json({ likes: blogC.likes, isLiked: !isLiked });
   } catch (error) {
     console.error('Error toggling like:', error);
     res.status(500).json({ error: 'Error toggling like' });

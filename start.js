@@ -31,5 +31,5 @@ const app = require('./app');
 const port = 5968;
 
 https.createServer(options, app).listen(port, () => {
-  console.log(`HTTPS server running on https://localhost:${port}/`);
+  console.log(`HTTPS server running on https://localhost:${port}/home`);
 });
