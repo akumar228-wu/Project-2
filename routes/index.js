@@ -1,4 +1,4 @@
-require('../models/Blog');
+require('../models/blog');
 require('../models/Registration');
 const express = require('express');
 const mongoose = require('mongoose');
