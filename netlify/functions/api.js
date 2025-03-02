@@ -157,7 +157,7 @@ app.use((req, res, next) => {
 //    ROUTES
 //=======================
 // 8. Routes
-app.use('/api/', routes);
+app.use('/', routes);
 
 //=======================
 //    ERROR HANDLING
