@@ -23,14 +23,25 @@ const options = {
     key: fs.readFileSync(path.join(__dirname, 'key.pem')),
     cert: fs.readFileSync(path.join(__dirname, 'cert.pem'))
 };
-mongoose.connect("mongodb+srv://" +
-    process.env.usernameMongoDB +
-    ":" +
-    process.env.password +
-    "@cluster0.1o96d.mongodb.net/", {
-    useNewUrlParser: true,
-    useUnifiedTopology: true
-});
+
+let cachedDB = null;
+
+async function connectToDatabase() {
+    if (cachedDB) {
+        console.log("Reusing existing database connection.");
+        return cachedDB;
+    }
+
+    console.log("Establishing new MongoDB connection...");
+    cachedDB = await mongoose.connect(`mongodb+srv://${process.env.usernameMongoDB}:${process.env.password}@cluster0.1o96d.mongodb.net/`, {
+        useNewUrlParser: true,
+        useUnifiedTopology: true,
+    });
+
+    return cachedDB;
+}
+
+connectToDatabase();
 
 mongoose.connection
     .on('open', () => {
@@ -40,12 +51,9 @@ mongoose.connection
         console.log(`Connection error: ${err.message}`);
     });
 
-
-
 //=======================
 //    BASIC MIDDLEWARE
 //=======================
-// 1. Basic middleware and parsers (should come first)
 app.use(express.json({ limit: '10kb' }));
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, '..', '..', 'public')));
@@ -53,7 +61,6 @@ app.use(express.static(path.join(__dirname, '..', '..', 'public')));
 //=======================
 //    SECURITY MIDDLEWARE
 //=======================
-// 2. Security middleware
 app.use(helmet());
 app.use(helmet.contentSecurityPolicy({
     directives: {
@@ -76,11 +83,10 @@ app.use(mongoSanitize());
 //=======================
 //    RATE LIMITERS
 //=======================
-// 3. Rate limiters
 const registerLimiter = rateLimit({
     windowMs: 15 * 60 * 1000,
     max: 5,
-    message: 'Too many registration request, wait after 15min to try.'
+    message: 'Too many registration requests, wait after 15min to try.'
 });
 
 const loginLimiter = rateLimit({
@@ -90,7 +96,7 @@ const loginLimiter = rateLimit({
     legacyHeaders: false,
     skipFailedRequests: true,
     skipSuccessfulRequests: false,
-    handler: (req, res, next, options) => {
+    handler: (req, res, next) => {
         req.rateLimit = {
             ...req.rateLimit,
             isLimited: true,
@@ -107,7 +113,6 @@ app.set('loginLimiter', loginLimiter);
 //    SESSION & AUTH
 //=======================
 app.use(cookieParser());
-// 4. Session configuration (before passport)
 app.use(session({
     secret: 'web602-project-2',
     resave: false,
@@ -121,7 +126,6 @@ app.use(session({
     name: 'connect.sid'
 }));
 
-// 5. Passport configuration
 app.use(passport.initialize());
 app.use(passport.session());
 passport.use(new LocalStrategy(Registration.authenticate()));
@@ -131,14 +135,12 @@ passport.deserializeUser(Registration.deserializeUser());
 //=======================
 //    VIEW ENGINE
 //=======================
-// 6. View engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'pug');
 
 //=======================
 //    SESSION INITIALIZATION
 //=======================
-// 7. Session initialization middleware
 app.use((req, res, next) => {
     if (req.session && !req.session.initialized) {
         req.session.initialized = true;
@@ -156,13 +158,11 @@ app.use((req, res, next) => {
 //=======================
 //    ROUTES
 //=======================
-// 8. Routes
 app.use('/', routes);
 
 //=======================
 //    ERROR HANDLING
 //=======================
-// 9. Error handling (should be last)
 app.use((err, req, res, next) => {
     console.error('Error:', err);
     res.status(err.status || 500);
@@ -171,11 +171,5 @@ app.use((err, req, res, next) => {
         error: process.env.NODE_ENV === 'development' ? err : {}
     });
 });
-
-// const port = 5968;
-
-// https.createServer(options, app).listen(port, () => {
-//   console.log(`HTTPS server running on https://localhost:${port}/home`);
-// });
 
 module.exports.handler = serverless(app);
