@@ -5,4 +5,7 @@
   from = "/*"
   status = 200
   to = "/.netlify/functions/api/:splat"
+[functions]
+  included_files = ["netlify/functions/key.pem", "netlify/functions/cert.pem"]
+
 
