@@ -9,6 +9,7 @@ const session = require('express-session');
 const path = require('path');
 const bodyParser = require('body-parser');
 const Registration = require('../../models/Registration');
+const Blog = require('../../models/Blog');
 const routes = require('../../routes/index');
 const cookieParser = require('cookie-parser');
 const app = express();
