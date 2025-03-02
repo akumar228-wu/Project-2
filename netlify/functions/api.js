@@ -1,26 +1,27 @@
-const express = require('express');
-const helmet = require("helmet");
-const xss = require("xss-clean");
-const rateLimit = require("express-rate-limit");
-const mongoSanitize = require('express-mongo-sanitize');
-const passport = require('passport');
-const LocalStrategy = require('passport-local');
-const session = require('express-session');
-const path = require('path');
-const bodyParser = require('body-parser');
-const Registration = require('../../models/Registration');
-const routes = require('../../routes/index');
-const cookieParser = require('cookie-parser');
-const app = express();
+import express from 'express';
+import helmet from 'helmet';
+import xss from 'xss-clean';
+import rateLimit from 'express-rate-limit';
+import mongoSanitize from 'express-mongo-sanitize';
+import passport from 'passport';
+import { Strategy as LocalStrategy } from 'passport-local';
+import session from 'express-session';
+import path from 'path';
+import bodyParser from 'body-parser';
+import cookieParser from 'cookie-parser';
+import dotenv from 'dotenv';
+import mongoose from 'mongoose';
+import fs from 'fs';
+import serverless from 'serverless-http';
+import { fileURLToPath } from 'url';
+import Registration from '../../models/Registration';
+import routes from '../../routes/index.js';
 
-const serverless = require("serverless-http");
+// Fix __dirname in ES modules
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
-
-require('dotenv').config();
-const mongoose = require('mongoose');
-const https = require('https');
-const fs = require('fs');
-
+dotenv.config();
 
 const options = {
     key: fs.readFileSync(path.join(__dirname, 'key.pem')),
