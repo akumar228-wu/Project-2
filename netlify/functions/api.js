@@ -16,7 +16,7 @@ import serverless from 'serverless-http';
 import { fileURLToPath } from 'url';
 import Registration from '../../models/Registration';
 import routes from '../../routes/index.js';
-
+const app = express();
 dotenv.config();
 
 const options = {
