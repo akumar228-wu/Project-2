@@ -6,7 +6,7 @@ const passport = require('passport');
 const { body, validationResult } = require('express-validator');
 const router = express.Router();
 const Registration = mongoose.model('Registration');
-require('../../models/Blog');
+require('../models/Blog');
 const Blog = mongoose.model('Blog');
 
 router.get('/home', isLoggedIn, (req, res) => {
