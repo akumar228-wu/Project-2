@@ -1,0 +1,21 @@
+\extends layout
+
+block content
+  h1 User Profile
+
+  form(action='/profile/update' method='POST')
+    label(for='username') Username:
+    input(type='text' name='username' value=user.username readonly)
+
+    label(for='email') Email:
+    input(type='email' name='email' value=user.email required)
+
+    label(for='phone') Phone:
+    input(type='text' name='phone' value=user.phone)
+
+    label(for='bio') Bio:
+    textarea(name='bio')= user.bio
+
+    button(type='submit') Update Profile
+
+  a(href='/blog') ← Back to Blogs

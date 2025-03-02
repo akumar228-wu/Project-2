@@ -1,0 +1,23 @@
+extends layout
+
+block content
+  h1 Top Liked Blogs
+  .blog-grid
+    each blog in topBlogs
+      .blog-card
+        img(src=blog.image_url, alt=blog.title)
+        h3= blog.title
+        p= blog.description
+        p Likes: #{blog.likes}
+        a(href='/blog/' + blog._id) Read More
+
+style.
+  .blog-grid {
+    display: flex;
+    gap: 20px;
+  }
+  .blog-card {
+    border: 1px solid #ccc;
+    padding: 15px;
+    border-radius: 8px;
+  }
