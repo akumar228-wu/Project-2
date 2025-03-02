@@ -23,8 +23,8 @@ const fs = require('fs');
 
 
 const options = {
-    key: Buffer.from(process.env.KEY_PEM, 'base64').toString('ascii'),
-    cert: Buffer.from(process.env.CERT_PEM, 'base64').toString('ascii')
+    key: fs.readFileSync(path.join(__dirname, 'key.pem')),
+    cert: fs.readFileSync(path.join(__dirname, 'cert.pem'))
 };
 mongoose.connect("mongodb+srv://" +
     process.env.usernameMongoDB +
