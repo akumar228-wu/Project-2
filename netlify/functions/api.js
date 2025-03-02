@@ -48,7 +48,7 @@ mongoose.connection
 // 1. Basic middleware and parsers (should come first)
 app.use(express.json({ limit: '10kb' }));
 app.use(bodyParser.urlencoded({ extended: true }));
-app.use(express.static('public'));
+app.use(express.static(path.join(__dirname, 'public')));
 
 //=======================
 //    SECURITY MIDDLEWARE
