@@ -2,11 +2,9 @@
     functions = "netlify/functions"
 [[redirects]]
   force = true
-  from = "/*"
+  from = "/api/*"
   status = 200
   to = "/.netlify/functions/api/:splat"
 [functions]
   included_files = ["netlify/functions/key.pem", "netlify/functions/cert.pem"]
   external_node_modules = ["pug"]
-
-
