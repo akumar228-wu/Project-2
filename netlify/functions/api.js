@@ -14,6 +14,9 @@ const routes = require('../../routes/index');
 const cookieParser = require('cookie-parser');
 const app = express();
 
+const serverless = require("serverless-http");
+
+
 require('dotenv').config();
 const mongoose = require('mongoose');
 const https = require('https');
@@ -159,7 +162,7 @@ app.use((req, res, next) => {
 //    ROUTES
 //=======================
 // 8. Routes
-app.use('/', routes);
+app.use('/api/', routes);
 
 //=======================
 //    ERROR HANDLING
@@ -174,10 +177,10 @@ app.use((err, req, res, next) => {
     });
 });
 
-const port = 5968;
+// const port = 5968;
 
-https.createServer(options, app).listen(port, () => {
-  console.log(`HTTPS server running on https://localhost:${port}/home`);
-});
+// https.createServer(options, app).listen(port, () => {
+//   console.log(`HTTPS server running on https://localhost:${port}/home`);
+// });
 
-module.exports = app;
+module.exports.handler = serverless(app);
