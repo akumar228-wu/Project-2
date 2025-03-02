@@ -45,7 +45,6 @@ mongoose.connection
     });
 
 
-require('../../models/Blog');
 
 //=======================
 //    BASIC MIDDLEWARE
