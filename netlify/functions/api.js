@@ -23,8 +23,8 @@ const fs = require('fs');
 
 
 const options = {
-    key: fs.readFileSync('../../key.pem'),
-    cert: fs.readFileSync('../../cert.pem')
+    key: fs.readFileSync(''),
+    cert: fs.readFileSync('./cert.pem')
 };
 mongoose.connect("mongodb+srv://" +
     process.env.usernameMongoDB +
