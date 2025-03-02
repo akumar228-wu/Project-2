@@ -4,8 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-   "watch": "concurrently \"nodemon ./start.js\" \"node-sass --watch public/scss -o public/css\"",
-    "start": "node ./start.js",
+    "watch": "concurrently \"nodemon netlify/functions/api.js\" \"node-sass --watch public/scss -o public/css\"",
+    "start": "node netlify/functions/api.js",
     "test": "jest",
     "test:watch": "jest --watch",
     "test:coverage": "jest --coverage"
