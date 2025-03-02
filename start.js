@@ -30,5 +30,5 @@ export async function connectToDatabase() {
 
 connectToDatabase().catch(err => console.error("MongoDB Initial Connection Failed:", err));
 
-require('../../models/Registration');
-require('../../models/blog');
+require('./models/Registration');
+require('./models/blog');

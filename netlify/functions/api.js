@@ -14,7 +14,7 @@ import fs from 'fs';
 import serverless from 'serverless-http';
 import Registration from '../../models/Registration';
 import routes from '../../routes/index.js';
-import { connectToDatabase } from './start.js';
+import { connectToDatabase } from '../../start.js';
 const app = express();
 dotenv.config();
 
