@@ -17,10 +17,6 @@ import { fileURLToPath } from 'url';
 import Registration from '../../models/Registration';
 import routes from '../../routes/index.js';
 
-// Fix __dirname in ES modules
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
-
 dotenv.config();
 
 const options = {
